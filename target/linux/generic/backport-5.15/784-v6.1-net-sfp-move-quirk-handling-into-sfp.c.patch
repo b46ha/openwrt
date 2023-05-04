@@ -151,7 +151,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  #if IS_ENABLED(CONFIG_HWMON)
  	struct sfp_diag diag;
  	struct delayed_work hwmon_probe;
-@@ -315,6 +317,93 @@ static const struct of_device_id sfp_of_
+@@ -315,6 +317,101 @@ static const struct of_device_id sfp_of_
  };
  MODULE_DEVICE_TABLE(of, sfp_of_match);
  
@@ -191,6 +191,14 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 +		.vendor = "HUAWEI",
 +		.part = "MA5671A",
 +		.modes = sfp_quirk_2500basex,
++               .fixup = sfp_fixup_ignore_tx_fault,
++       }, {
++               //  FS GPON-ONU-34-20BI can operate at 2500base-X, but report 1.2GBd
++               // NRZ in their EEPROM
++               .vendor = "FS",
++               .part = "GPON-ONU-34-20BI",
++               .modes = sfp_quirk_2500basex,
++               .fixup = sfp_fixup_ignore_tx_fault,
 +	}, {
 +		// Lantech 8330-262D-E can operate at 2500base-X, but
 +		// incorrectly report 2500MBd NRZ in their EEPROM
@@ -245,7 +253,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static unsigned long poll_jiffies;
  
  static unsigned int sfp_gpio_get_state(struct sfp *sfp)
-@@ -1966,6 +2055,8 @@ static int sfp_sm_mod_probe(struct sfp *
+@@ -1966,6 +2063,8 @@ static int sfp_sm_mod_probe(struct sfp *
  	else
  		sfp->tx_fault_ignore = false;
  
@@ -254,7 +262,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	return 0;
  }
  
-@@ -2077,7 +2168,8 @@ static void sfp_sm_module(struct sfp *sf
+@@ -2077,7 +2176,8 @@ static void sfp_sm_module(struct sfp *sf
  			break;
  
  		/* Report the module insertion to the upstream device */

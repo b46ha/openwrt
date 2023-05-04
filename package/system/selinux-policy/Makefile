@@ -7,13 +7,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=selinux-policy
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://git.defensec.nl/selinux-policy.git
-PKG_VERSION:=1.2.3
-PKG_MIRROR_HASH:=ff1ddca168a6631aeac34352657f424bc4acf5d50b8aa7ff8dfa8c9663ba8538
-PKG_SOURCE_VERSION:=v$(PKG_VERSION)
+
+PKG_SOURCE_URL:=https://github.com/tidalf/selinux-policy.git
+PKG_SOURCE_DATE:=2023-04-29
+PKG_SOURCE_VERSION:=2b190268648bf0124eb4493eadc304089f4de33c
+# use 'make package/selinux-policy-myfork/check V=s' to generate, or 'skip'
+PKG_MIRROR_HASH:=skip
+
+PKG_SOURCE_URL:=https://github.com/tidalf/selinux-policy.git
 PKG_BUILD_DEPENDS:=secilc/host policycoreutils/host
 
-PKG_MAINTAINER:=Dominick Grift <dominick.grift@defensec.nl>
+PKG_MAINTAINER:=Tid <tidalf@ematome.com>
 PKG_CPE_ID:=cpe:/a:defensec:selinux-policy
 PKG_LICENSE:=Unlicense
 PKG_LICENSE_FILES:=LICENSE
@@ -24,7 +28,7 @@ define Package/selinux-policy
 	SECTION:=system
 	CATEGORY:=Base system
 	TITLE:=SELinux security policy for OpenWrt
-	URL:=https://git.defensec.nl/?p=selinux-policy.git;a=summary
+	URL:=https://github.com/tidalf/selinux-policy.git
 	PKGARCH:=all
 endef
 

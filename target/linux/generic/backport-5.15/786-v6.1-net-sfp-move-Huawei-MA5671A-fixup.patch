@@ -25,15 +25,15 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static void sfp_quirk_2500basex(const struct sfp_eeprom_id *id,
  				unsigned long *modes)
  {
-@@ -359,6 +364,7 @@ static const struct sfp_quirk sfp_quirks
- 		.vendor = "HUAWEI",
- 		.part = "MA5671A",
+@@ -346,6 +351,7 @@ static const struct sfp_quirk sfp_quirks
+ 		.vendor = "ALCATELLUCENT",
+ 		.part = "G010SP",
  		.modes = sfp_quirk_2500basex,
 +		.fixup = sfp_fixup_ignore_tx_fault,
  	}, {
- 		// Lantech 8330-262D-E can operate at 2500base-X, but
- 		// incorrectly report 2500MBd NRZ in their EEPROM
-@@ -2051,11 +2057,7 @@ static int sfp_sm_mod_probe(struct sfp *
+ 		// Alcatel Lucent G-010S-A can operate at 2500base-X, but
+ 		// report 3.2GBd NRZ in their EEPROM
+@@ -2059,11 +2065,7 @@ static int sfp_sm_mod_probe(struct sfp *
  
  	sfp->module_t_start_up = T_START_UP;
  

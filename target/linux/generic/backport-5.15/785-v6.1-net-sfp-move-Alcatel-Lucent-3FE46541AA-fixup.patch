@@ -35,7 +35,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	}, {
  		// Huawei MA5671A can operate at 2500base-X, but report 1.2GBd
  		// NRZ in their EEPROM
-@@ -2043,11 +2049,7 @@ static int sfp_sm_mod_probe(struct sfp *
+@@ -2051,11 +2057,7 @@ static int sfp_sm_mod_probe(struct sfp *
  	if (sfp->gpio[GPIO_LOS])
  		sfp->state_hw_mask |= SFP_F_LOS;
  
@@ -48,7 +48,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  
  	if (!memcmp(id.base.vendor_name, "HUAWEI          ", 16) &&
  	    !memcmp(id.base.vendor_pn, "MA5671A         ", 16))
-@@ -2056,6 +2058,8 @@ static int sfp_sm_mod_probe(struct sfp *
+@@ -2064,6 +2066,8 @@ static int sfp_sm_mod_probe(struct sfp *
  		sfp->tx_fault_ignore = false;
  
  	sfp->quirk = sfp_lookup_quirk(&id);
