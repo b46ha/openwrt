@@ -151,7 +151,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  #if IS_ENABLED(CONFIG_HWMON)
  	struct sfp_diag diag;
  	struct delayed_work hwmon_probe;
-@@ -315,6 +317,93 @@ static const struct of_device_id sfp_of_
+@@ -315,6 +317,99 @@ static const struct of_device_id sfp_of_
  };
  MODULE_DEVICE_TABLE(of, sfp_of_match);
  
@@ -192,6 +192,13 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 +		.part = "MA5671A",
 +		.modes = sfp_quirk_2500basex,
 +	}, {
++		//  FS GPON-ONU-34-20BI can operate at 2500base-X, but report 1.2GBd
++		// NRZ in their EEPROM
++		.vendor = "FS",
++		.part = "GPON-ONU-34-20BI",
++		.modes = sfp_quirk_2500basex,
++		.fixup = sfp_fixup_ignore_tx_fault,
++      }, {
 +		// Lantech 8330-262D-E can operate at 2500base-X, but
 +		// incorrectly report 2500MBd NRZ in their EEPROM
 +		.vendor = "Lantech",
